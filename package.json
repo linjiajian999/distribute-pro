@@ -1,0 +1,14 @@
+{
+  "name": "distribute-pro",
+  "version": "1.0.0",
+  "description": "distribute the programme",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "linjiajian999",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^8.0.57"
+  }
+}
