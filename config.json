@@ -1,6 +1,6 @@
 {
-  "sourcePath": "",
-  "targetPath": "",
-  "include": [],
-  "exclude": []
+  "sourcePath": "testpath",
+  "targetPath": "testpath",
+  "include": ["1", "2"],
+  "exclude": ["3", "4"]
 }

@@ -4,6 +4,8 @@
   "description": "distribute the programme",
   "main": "index.js",
   "scripts": {
+    "demo": "node index.js demo",
+    "real": "node index.js real",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "linjiajian999",
