@@ -19,8 +19,7 @@ function getInitialConfig(): Config {
   }
 }
 function readConfig(): Config {
-  let configObject = getConfigObject()
-  return configObject
+  return getConfigObject()
 }
 function getConfigObject(): Config {
   let configPath = path.resolve(__dirname, '../config.json')

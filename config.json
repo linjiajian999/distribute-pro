@@ -1,6 +1,9 @@
 {
-  "sourcePath": "testpath",
-  "targetPath": "testpath",
+  "source": "testpath",
+  "target": {
+    "demo": "../dis-test",
+    "real": "../dis-test"
+  },
   "include": ["1", "2"],
   "exclude": ["3", "4"]
 }
