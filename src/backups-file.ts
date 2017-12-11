@@ -4,15 +4,34 @@ import selfEnv from './enviroment'
 import * as path from 'path'
 import * as fs from 'fs'
 
-function backup () {
-  const targetPath: string = config.target[selfEnv]
+import copy from './copy'
+
+export default function backup (): Promise<any> {
+  const basePath = path.resolve(__dirname, '../')
+
+  const targetPath: string = path.resolve(basePath, config.target[selfEnv])
   const bakPath: string = path.resolve(targetPath + '/bak')
 
-  fs.readdir(bakPath, function(err, files) {
-    if (err) {
-      fs.mkdirSync(bakPath)
-    }
+  return new Promise((resolve, reject) => {
+    fs.readdir(bakPath, function(err, files) {
+      console.log('备份中...')
+      if (err) {
+        fs.mkdirSync(bakPath)
+      }
+      // date
+      let date = new Date()
+      const bakDatePath = `${bakPath}/${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+
+      // 新建 备份文件夹
+      fs.mkdirSync(bakDatePath)
+      // 开始备份
+      copy(targetPath, bakDatePath).then(() => {
+        console.log('备份完成')
+        resolve()
+      })
+      .catch(err => {
+        reject(err)
+      })
+    })
   })
 }
-
-export default backup

@@ -9,7 +9,7 @@ import * as process from 'process'
 
 function getInitialConfig(): Config {
   return {
-    sourcePath: '',
+    source: '',
     target: {
       demo: '',
       real: '',

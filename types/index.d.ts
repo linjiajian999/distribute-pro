@@ -4,7 +4,7 @@ export interface Target {
   [key: string]: any
 }
 export interface Config {
-  sourcePath: string,
+  source: string,
   target: Target,
   include: string[],
   exclude: string[]
