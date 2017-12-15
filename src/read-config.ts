@@ -3,9 +3,10 @@ import {
   Config
 } from '../types/index'
 // node
-import * as path from 'path'
-import * as fs from 'fs'
 import * as process from 'process'
+import { type } from 'os';
+
+let configjson: Config = require('../config.json')
 
 function getInitialConfig(): Config {
   return {
@@ -22,16 +23,12 @@ function readConfig(): Config {
   return getConfigObject()
 }
 function getConfigObject(): Config {
-  let configPath = path.resolve(__dirname, '../config.json')
-  let buffer: Buffer = fs.readFileSync(configPath)
-  let str = buffer.toString()
   let config = getInitialConfig()
-  try {
-    config = JSON.parse(str)
-  } catch(err) {
+  if (typeof configjson === 'object') {
+    config = configjson
+  } else {
     config = getInitialConfig()
     console.log('解析配置文件错，请核对')
-    console.log(`err: \n ${err}`)
     process.exit()
   }
   return config
