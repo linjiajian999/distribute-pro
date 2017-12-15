@@ -7,9 +7,9 @@ import * as fs from 'fs'
 import copy from './copy'
 
 export default function backup (): Promise<any> {
-  const basePath = path.resolve(__dirname, '../')
+  const configPath = path.resolve(__dirname, '../config.json')
 
-  const targetPath: string = path.resolve(basePath, config.target[selfEnv])
+  const targetPath: string = path.resolve(configPath, config.target[selfEnv])
   const bakPath: string = path.resolve(targetPath + '/bak')
 
   return new Promise((resolve, reject) => {

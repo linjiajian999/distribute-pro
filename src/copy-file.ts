@@ -1,19 +1,21 @@
-import copy from './copy'
+
 import * as fs from 'fs'
 import * as path from 'path'
+import * as zlib from 'zlib'
 
 import selfEnv from './enviroment'
 import config from './read-config'
 
+import copy from './copy'
 import backup from './backups-file'
 import remove from './remove'
 
 export default async function removeToTarget() {
   await backup()
-  const basePath = path.resolve(__dirname, '../')
+  const configPath = path.resolve(__dirname, '../config.json')
 
-  const target = path.resolve(basePath, config.target[selfEnv])
-  const src = path.resolve(basePath, config.source)
+  const target = path.resolve(configPath, config.target[selfEnv])
+  const src = path.resolve(configPath, config.source)
 
   let lastSrc: string = ''
   let lastTime: number = Number.MIN_SAFE_INTEGER
