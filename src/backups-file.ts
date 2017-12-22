@@ -1,3 +1,4 @@
+// 备份文件
 import config from './read-config'
 import selfEnv from './enviroment'
 
@@ -25,7 +26,9 @@ export default function backup (): Promise<any> {
       // 新建 备份文件夹
       fs.mkdirSync(bakDatePath)
       // 开始备份
-      copy(targetPath, bakDatePath).then(() => {
+      const include: string[] = []
+      const exclude: string[] = []
+      copy(targetPath, bakDatePath, include, exclude).then(() => {
         console.log('备份完成')
         resolve()
       })

@@ -1,4 +1,4 @@
-
+// 复制文件到目录
 import * as fs from 'fs'
 import * as path from 'path'
 import * as zlib from 'zlib'
@@ -11,16 +11,24 @@ import backup from './backups-file'
 import remove from './remove'
 
 export default async function removeToTarget() {
+  // 先备份
   await backup()
+  // 然后复制文件到目标目录
+  console.log('备份完成 => 准备删除')
   const configPath = path.resolve(__dirname, '../config.json')
-
-  const target = path.resolve(configPath, config.target[selfEnv])
-  const src = path.resolve(configPath, config.source)
-
+  let target = path.resolve(configPath, config.target[selfEnv])
+  let src = path.resolve(configPath, config.source)
   let lastSrc: string = ''
   let lastTime: number = Number.MIN_SAFE_INTEGER
 
-  const srcFiles: string[] = fs.readdirSync(src)
+  // 获取最新的 资源文件夹（在src中可能存在旧的资源文件夹，获取到最新那个
+  let srcFiles: string[] = []
+  try {
+    srcFiles = fs.readdirSync(src)
+  } catch(err) {
+    console.log('config.source 设置错误')
+    throw err
+  }
   srcFiles.forEach(srcfile => {
     const srcfiledir = src + '/' + srcfile
     const stats: fs.Stats = fs.statSync(srcfiledir)
@@ -32,9 +40,11 @@ export default async function removeToTarget() {
     lastSrc = src + '/' + srcfile
   })
   console.log('开始删除')
+  // 删除目标文件夹中的资源文件
   remove(target).then(() => {
     console.log('删除完成')
     console.log('开始复制')
+    // 然后复制资源文件 到 目标目录中
     copy(lastSrc, target)
   })
   .then(() => {
