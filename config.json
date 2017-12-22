@@ -1,9 +1,9 @@
 {
-  "source": "/Volumes/HDD/0-github/dis-test-src",
+  "source": "",
   "target": {
-    "demo": "/Volumes/HDD/1-product/project-1/demo",
-    "real": "/Volumes/HDD/1-product/project-1/real"
+    "demo": "",
+    "real": ""
   },
-  "include": ["logoin.aspx", "login.aspx", "static"],
+  "include": [],
   "exclude": []
 }

@@ -3,6 +3,7 @@ node_modules/
 dist/
 npm-debug.log*
 test.js
+test.config.json
 
 # Editor directories and files
 .idea
